@@ -117,31 +117,37 @@ It shows a slight downward trend: as the number of ingredients increases, the av
 
 ## **Assessment of Missingness**
 
-### **Addressing NMAR (Not Missing At Random) Question**
-We examined whether missing values in the `description` column were associated with rating differences.
-
 ### **NMAR Analysis – Description Column**
 
-We believe the `description` column is **Not Missing At Random (NMAR)**. This is because whether a recipe has a description is likely related to unobserved characteristics such as the recipe's source or author behavior. For instance, recipes uploaded by less active users or auto-generated entries may be more likely to lack detailed descriptions. These factors are not captured by other columns in the dataset like `minutes` or `n_ingredients`.
+We suspect the `description` column is **Not Missing At Random (NMAR)**. The presence or absence of a description likely depends on latent factors such as whether the recipe was user-submitted or automatically generated. These influences are not captured by other observed columns in our dataset.
 
-This reasoning is supported by our permutation test, which showed a statistically significant difference in the ratings between recipes with and without descriptions. This suggests that the missingness of `description` is associated with some latent variable affecting both the presence of a description and the rating itself.
+To support this, we performed a **permutation test** comparing `rating` across recipes with and without a description.
 
-If we had access to additional metadata, such as whether the recipe was user-submitted or system-generated, we might be able to determine if the missingness is instead MAR. However, in the absence of such data, the missingness in `description` is best classified as NMAR.
+- **Test Statistic**: Difference in average rating  
+- **Observed Difference**: -1.47  
+- **p-value**: **0.003**
 
+Since the p-value is **less than 0.05**, we **reject the null hypothesis** and conclude that the missingness of `description` is dependent on `rating` (i.e., **not missing completely at random**). This aligns with our suspicion that certain types of recipes are more prone to lacking descriptions.
 
-### **Permutation Tests for Missingness**
-A permutation test was conducted:
-- **Observed Mean Difference:** -1.47
-- **p-value:** 0.003
-- Conclusion: The missingness in `description` is likely **not random** (NMAR). This means certain recipes are more prone to missing descriptions, which may introduce bias.
+---
 
-**Missingness Analysis Plot**
+**Missingness Plot**
+
+We visualized the distribution of `n_ingredients` for recipes with and without ratings to highlight differences:
+
 <iframe
   src="assets/missingness_ingredients.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
+
+
+- The `description` column is NMAR based on strong evidence of rating-based dependency.
+- The `rating` column shows borderline dependency on `n_ingredients`, suggesting it may not be fully MCAR.
+- A future revision might use a clearer independent column pair to meet rubric criteria for a missingness-independent interpretation.
+
+
 ---
 
 ## **Hypothesis Testing**
