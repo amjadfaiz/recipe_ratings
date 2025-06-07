@@ -58,7 +58,9 @@ We analyzed various aspects of the dataset:
 - **Cooking Time vs. Ratings:** No strong correlation was found.
 - **Steps vs. Ratings:** Recipes with more steps do not necessarily receive higher ratings.
 
+
 **Visualizations of Rating Distribution, Ingredients, and Steps vs. Ratings**
+
 
 **Distribution of Number of Ingredients**
 
@@ -118,6 +120,15 @@ It shows a slight downward trend: as the number of ingredients increases, the av
 ### **Addressing NMAR (Not Missing At Random) Question**
 We examined whether missing values in the `description` column were associated with rating differences.
 
+### **NMAR Analysis – Description Column**
+
+We believe the `description` column is **Not Missing At Random (NMAR)**. This is because whether a recipe has a description is likely related to unobserved characteristics such as the recipe's source or author behavior. For instance, recipes uploaded by less active users or auto-generated entries may be more likely to lack detailed descriptions. These factors are not captured by other columns in the dataset like `minutes` or `n_ingredients`.
+
+This reasoning is supported by our permutation test, which showed a statistically significant difference in the ratings between recipes with and without descriptions. This suggests that the missingness of `description` is associated with some latent variable affecting both the presence of a description and the rating itself.
+
+If we had access to additional metadata, such as whether the recipe was user-submitted or system-generated, we might be able to determine if the missingness is instead MAR. However, in the absence of such data, the missingness in `description` is best classified as NMAR.
+
+
 ### **Permutation Tests for Missingness**
 A permutation test was conducted:
 - **Observed Mean Difference:** -1.47
@@ -154,6 +165,14 @@ The objective is to predict recipe ratings using available features where we att
 - **Number of ingredients (`n_ingredients`)**
 - **Cooking time (`minutes`)**
 - **Number of steps (`n_steps`)**
+
+In this project, our goal is to predict how users rate a given recipe based on its inherent characteristics. This task is framed as a **regression problem**, as the response variable—`rating`—is a continuous numerical value ranging from 1 to 5. Predicting recipe ratings can be valuable for online food platforms aiming to personalize recommendations or surface high-quality content to users.
+
+The response variable, `rating`, was chosen because it directly captures user feedback and serves as a quantifiable measure of a recipe’s perceived quality. Since this variable reflects the outcome we want to estimate, it is a natural choice for a supervised learning task centered around user preferences.
+
+To evaluate our model, we use **Mean Squared Error (MSE)**. MSE is appropriate in this context because it penalizes larger errors more heavily, ensuring that substantial mispredictions—such as estimating a 5-star recipe as a 2—are treated more seriously than minor discrepancies. This sensitivity to error magnitude is important when modeling user satisfaction, where small deviations may be acceptable, but large gaps could result in poor recommendations.
+
+All the features used in our model—such as the number of ingredients (`n_ingredients`), preparation time (`minutes`), and number of steps (`n_steps`)—are known at the time the recipe is created or viewed. This ensures that our model only relies on information that is realistically accessible at the time of prediction, avoiding any data leakage and making it suitable for deployment in real-world applications.
 
 ---
 
