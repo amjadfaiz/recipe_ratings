@@ -177,16 +177,24 @@ All the features used in our model—such as the number of ingredients (`n_ingre
 ---
 
 ## **Baseline Model**
-We trained a **Linear Regression model** as the baseline.
 
-**Results:**
-- **Mean Squared Error (MSE):** 1.7626
-- **Mean Absolute Error (MAE):** 0.8935
-- **R² Score:** -0.0000 (indicating the model has no predictive power)
+For our baseline model, we trained a Linear Regression model using three features: `n_ingredients`, `minutes`, and `n_steps`.
 
-### **Interpretation**
-- The model performed poorly, meaning that the selected features are not strong predictors of ratings.
-- This led to further feature engineering in the final model.
+- The feature `n_ingredients` is a **quantitative** variable representing the number of ingredients in each recipe.
+- The feature `minutes` is also **quantitative**, indicating the total time required to prepare and cook the recipe.
+- Similarly, `n_steps` is a **quantitative** feature that counts the number of preparation steps.
+
+These features were selected because they are simple, numeric, and available at the time of prediction.
+
+After standardizing the features using `StandardScaler`, we trained a baseline Linear Regression model. Its performance was evaluated using Mean Squared Error (MSE), Mean Absolute Error (MAE), and R² score on a held-out test set.
+
+- **MSE:** 1.7583  
+- **MAE:** 0.8932  
+- **R²:** 0.0025
+
+### **Is the Baseline Model Good?**
+
+This baseline model is **not good**, as the R² score is extremely close to 0, indicating that the model explains almost none of the variance in the target variable (`rating`). While it slightly outperforms the naive baseline (which predicts the mean), the improvement is marginal. This suggests that the features used in this model are not strong predictors of recipe ratings, and more informative or diverse features are needed to build a better model.
 
 
 ---
