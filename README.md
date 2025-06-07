@@ -219,20 +219,39 @@ To improve performance, additional transformations and model selection technique
 
 ## **Fairness Analysis**
 
-We analyzed model performance fairness across different groups.
+We evaluated the fairness of our final model by comparing its performance across two recipe groups:
 
-### **Preparation Time Category**
-- **RMSE for Short Prep Time:** 4.43
-- **RMSE for Long Prep Time:** 5.10
-- **Permutation Test p-value:** 0.44 (No statistical bias found)
+**Group Definition**
+- **Short Recipes:** Recipes with a preparation time of **30 minutes or less**.
+- **Long Recipes:** Recipes with a preparation time of **more than 30 minutes**.
 
-### **Ingredient Complexity**
-- **RMSE for Simple Recipes:** 4.69
-- **RMSE for Complex Recipes:** 4.61
+This grouping allows us to test whether the model is equally effective for quick and lengthy recipes.
 
-### **Conclusion**
-- No significant fairness concerns were identified.
-- However, a more detailed fairness analysis incorporating user biases could be explored in the future.
+**Evaluation Metric**
+We used **Root Mean Squared Error (RMSE)** because it penalizes large errors more than small ones, which is critical for fairness-sensitive evaluation.
+
+**Test Statistic**
+We computed the **absolute difference in RMSE** between the two groups as our test statistic.
+
+**Hypothesis Test**
+- **Null Hypothesis (H₀):** The model performs equally well across short and long prep time groups.
+- **Alternative Hypothesis (H₁):** The model's performance differs across these two groups.
+- **Significance Level:** 0.05  
+- **Observed RMSE Difference:** |5.10 - 4.43| = **0.67**  
+- **Permutation Test p-value:** **0.48**
+
+Since the p-value is greater than the 0.05 significance threshold, we **fail to reject the null hypothesis**. This means there is **no statistically significant evidence** that the model performs differently between short and long preparation time recipes.
+
+**Additional Group: Ingredient Complexity**
+We also examined model performance based on ingredient complexity:
+- **Simple Recipes:** RMSE = 4.69  
+- **Complex Recipes:** RMSE = 4.61  
+
+While no formal hypothesis test was performed for this group, the small difference suggests minimal disparity.
+
+**Conclusion**
+Overall, the model does **not exhibit significant fairness issues** between recipe groups based on preparation time or ingredient complexity. Nonetheless, future work could involve analyzing fairness across user demographics or subjective taste preferences.
+
 
 ---
 
