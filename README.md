@@ -200,19 +200,44 @@ This baseline model is **not good**, as the R² score is extremely close to 0, i
 ---
 
 ## **Final Model**
-To improve performance, additional transformations and model selection techniques were applied:
-- **Feature Engineering:** Created additional features such as text-based metrics and log transformations.
-- **Hyperparameter Tuning:** Used **GridSearchCV** to optimize model parameters.
-- **Models Compared:** Linear Regression, Decision Tree, Random Forest.
 
-### **Best Model: Linear Regression (After Feature Engineering)**
-- **MSE:** 1.7573
-- **MAE:** 0.8932
-- **R² Score:** 0.0030 (a slight improvement over the baseline but still very weak)
+To improve upon the baseline model, we added two new features and applied more complex models with hyperparameter tuning.
 
-### **Interpretation**
-- Even with additional feature engineering, the model's predictive power remained low.
-- This suggests that user ratings might be influenced by **subjective factors not captured in the dataset**.
+**New Features Added**
+1. **`description_length`**: The number of characters in the recipe's description. This feature captures the richness of content provided, which may indicate recipe quality and affect user ratings.
+2. **`steps_length`**: The number of preparation steps. It reflects recipe complexity and can impact how users perceive difficulty and rate the recipe.
+
+Both features are intuitive, relevant, and available before a user leaves a rating, making them valid for prediction.
+
+**Model Architecture**
+We evaluated three models using pipelines:
+- **Linear Regression**
+- **DecisionTreeRegressor**
+- **RandomForestRegressor**
+
+Each model pipeline included preprocessing (standardization) and was trained using the same training/test split.
+
+**Hyperparameter Tuning**
+We used **GridSearchCV** with 5-fold cross-validation on the training set to tune the following parameters:
+
+- **Decision Tree:**
+  - `max_depth`: Tuned values = [3, 5, 10, None]
+  - **Best value:** `max_depth = 5`
+
+- **Random Forest:**
+  - `max_depth`: Tuned values = [5, 10, None]
+  - `n_estimators`: Tuned values = [50, 100]
+  - **Best values:** `max_depth = 10`, `n_estimators = 100`
+
+**Model Performance**
+
+| Model                    | MSE     | MAE     | R²      |
+|--------------------------|---------|---------|---------|
+| Linear Regression        | 1.75725 | 0.8932  | 0.0030  |
+| Decision Tree (Tuned)    | 1.75536 | 0.8899  | 0.0041  |
+| Random Forest (Tuned)    | 1.73498 | 0.8839  | 0.0157  |
+
+The **Random Forest Regressor** achieved the best performance with an **R² of 0.0157**, an improvement over the baseline Linear Regression (**R² = 0.0030**). While the gain is modest, it indicates that the added features contributed additional predictive value. This shows the benefit of feature engineering and model tuning in improving performance over a simple baseline.
 
 
 ---
