@@ -41,6 +41,16 @@ These columns allow us to examine whether recipes with more ingredients tend to 
 - Missing values in key features such as `description` were examined and handled appropriately.
 - Extracted numerical features such as `n_ingredients`, `minutes`, and `n_steps` for predictive modeling.
 
+### **Head of Cleaned Data (`merged_df`)**
+
+| id     | n_ingredients | rating |
+|--------|---------------|--------|
+| 333281 | 9             | 4.0    |
+| 453467 | 11            | 5.0    |
+| 306168 | 9             | 5.0    |
+| 286009 | 7             | 5.0    |
+| 475785 | 13            | 5.0    |
+
 ### **Exploratory Data Analysis (EDA)**
 We analyzed various aspects of the dataset:
 - **Rating Distribution:** Ratings are right-skewed, with most ratings being 4 or above.
