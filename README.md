@@ -59,6 +59,11 @@ We analyzed various aspects of the dataset:
 - **Steps vs. Ratings:** Recipes with more steps do not necessarily receive higher ratings.
 
 **Visualizations of Rating Distribution, Ingredients, and Steps vs. Ratings**
+
+**Distribution of Number of Ingredients**
+
+The histogram below displays the distribution of the number of ingredients used in recipes. Most recipes tend to use a moderate number of ingredients, with a noticeable peak around 7 to 10 ingredients. Very simple recipes (e.g., 1–3 ingredients) and highly complex ones (e.g., over 20 ingredients) are relatively rare. This distribution indicates that the dataset is centered around moderately complex recipes, which may reflect typical user preferences or platform standards.
+
 <iframe
   src="assets/n_ingredients_histogram.html"
   width="800"
@@ -66,12 +71,20 @@ We analyzed various aspects of the dataset:
   frameborder="0"
 ></iframe>
 
+**Distribution of Ratings**
+
+The histogram below shows the distribution of user ratings for recipes. The distribution is right-skewed, with the majority of ratings being 4.0 or 5.0. This suggests that users tend to rate recipes positively, potentially due to self-selection (users trying recipes they already expect to like) or rating inflation. Lower ratings (1.0 to 2.0) are rare, which may indicate a bias toward more favorable reviews in the dataset.
+
 <iframe
   src="assets/rating_distribution.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
+
+**Number of Ingredients vs. Ratings**
+
+The scatter plot below examines the relationship between the number of ingredients in a recipe and its user rating. There appears to be no strong or consistent trend: recipes with both few and many ingredients receive a wide range of ratings. This suggests that ingredient count alone is not a strong determinant of recipe quality as perceived by users. Other factors—such as taste, clarity of instructions, or subjective preferences—may play a larger role in influencing ratings.
 
 <iframe
   src="assets/ingredients_vs_rating.html"
@@ -96,6 +109,7 @@ The table below shows the average rating for recipes based on the number of ingr
 | 9            | 3.90   |
 | 10           | 3.85   |
 
+It shows a slight downward trend: as the number of ingredients increases, the average rating tends to decrease gradually. While the differences are small, this pattern may suggest that users slightly prefer simpler recipes, possibly because they are easier to prepare or require fewer resources. However, since the variation is minimal, ingredient count alone does not appear to have a strong influence on user ratings.
 
 ---
 
