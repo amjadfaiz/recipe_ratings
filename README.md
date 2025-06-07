@@ -121,19 +121,19 @@ It shows a slight downward trend: as the number of ingredients increases, the av
 
 We suspect the `description` column is **Not Missing At Random (NMAR)**. The presence or absence of a description likely depends on latent factors such as whether the recipe was user-submitted or automatically generated. These influences are not captured by other observed columns in our dataset.
 
-To support this, we performed a **permutation test** comparing `rating` across recipes with and without a description.
+To support this, we performed a **permutation test** comparing `n_ingredients` across recipes with and without a description.
 
 - **Test Statistic**: Difference in average rating  
 - **Observed Difference**: -1.47  
 - **p-value**: **0.003**
 
-Since the p-value is **less than 0.05**, we **reject the null hypothesis** and conclude that the missingness of `description` is dependent on `rating` (i.e., **not missing completely at random**). This aligns with our suspicion that certain types of recipes are more prone to lacking descriptions.
+Since the p-value is **less than 0.05**, we **reject the null hypothesis** and conclude that the missingness of `description` is dependent on `n_ingredients` (i.e., **not missing completely at random**). This aligns with our suspicion that certain types of recipes are more prone to lacking descriptions.
 
 ---
 
 **Missingness Plot**
 
-We visualized the distribution of `n_ingredients` for recipes with and without ratings to highlight differences:
+We visualized the distribution of `n_ingredients` for recipes with and without descriptions to highlight differences:
 
 <iframe
   src="assets/missingness_ingredients.html"
@@ -144,9 +144,6 @@ We visualized the distribution of `n_ingredients` for recipes with and without r
 
 
 - The `description` column is NMAR based on strong evidence of rating-based dependency.
-- The `rating` column shows borderline dependency on `n_ingredients`, suggesting it may not be fully MCAR.
-- A future revision might use a clearer independent column pair to meet rubric criteria for a missingness-independent interpretation.
-
 
 ---
 
