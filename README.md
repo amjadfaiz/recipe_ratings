@@ -41,7 +41,7 @@ These columns allow us to examine whether recipes with more ingredients tend to 
 - Missing values in key features such as `description` were examined and handled appropriately.
 - Extracted numerical features such as `n_ingredients`, `minutes`, and `n_steps` for predictive modeling.
 
-### **Head of Cleaned Data (`merged_df`)**
+### **Head of Cleaned Data**
 
 | id     | n_ingredients | rating |
 |--------|---------------|--------|
